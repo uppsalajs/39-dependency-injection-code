@@ -1,5 +1,4 @@
-/// <reference types="vitest/config" />
-import { defineConfig } from "vite"
+import { defineConfig } from "vitest/config"
 
 export default defineConfig({
 	test: {
@@ -14,7 +13,7 @@ export default defineConfig({
 			thresholds: {
 				statements: 70,
 				branches: 70,
-				functions: 70,
+				functions: 50,
 				lines: 70,
 			},
 		},

@@ -11,18 +11,13 @@
 	"homepage": "https://github.com/utily",
 	"private": false,
 	"type": "module",
-	"main": "./dist/cjs/index.js",
-	"module": "./dist/mjs/index.js",
-	"types": "./dist/types/index.d.ts",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
 			"import": {
-				"default": "./dist/mjs/index.js",
-				"types": "./dist/types/index.d.ts"
-			},
-			"require": {
-				"default": "./dist/cjs/index.js",
-				"types": "./dist/types/index.d.ts"
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
 			}
 		}
 	},
@@ -35,7 +30,7 @@
 	"scripts": {
 		"lint": "eslint --max-warnings=0 '**/*.{ts,tsx}'",
 		"fix": "eslint '**/*.{ts,tsx}' --fix",
-		"build": "rimraf dist/* && tsc -p tsconfig.mjs.json && tsc -p tsconfig.cjs.json",
+		"build": "rimraf dist/* && tsc -p tsconfig.mjs.json",
 		"test": "vitest --run",
 		"coverage": "vitest --coverage",
 		"prepare": "npm run build",
@@ -43,16 +38,18 @@
 		"verify": "npm run build && npm run test && npm run lint && npm audit"
 	},
 	"devDependencies": {
+		"@tsconfig/node20": "^20.1.5",
+		"@tsconfig/strictest": "^2.0.5",
 		"@types/node": "^22.10.2",
 		"@typescript-eslint/eslint-plugin": "8.18.1",
 		"@typescript-eslint/parser": "8.18.1",
-		"@vitest/coverage-v8": "^2.1.8",
+		"@vitest/coverage-v8": "^3.2.4",
 		"eslint": "^8.56.0",
 		"eslint-plugin-prettierx": "github:utily/eslint-plugin-prettierx#utily-20231004",
 		"eslint-plugin-simple-import-sort": "^12.1.1",
 		"prettierx": "github:utily/prettierx#utily-20231004",
 		"rimraf": "^6.0.1",
 		"typescript": "5.7.2",
-		"vitest": "^2.1.8"
+		"vitest": "^3.2.4"
 	}
 }
