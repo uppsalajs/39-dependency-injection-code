@@ -77,6 +77,8 @@ export namespace ModuleName {
 
 ## Import/Export Patterns
 
+- **Reexport**: Use underscore prefix when importing for later export
+
 ### Import Strategy
 
 ```typescript
@@ -142,28 +144,9 @@ describe("Date", () => {
 
 - **Minimal comments**: Code should be self-documenting through good naming
 - **Type descriptions**: Use isly's `.describe()` for type documentation
-- **JSDoc for complex functions**: Use JSDoc for functions with complex logic
 - **@deprecated tags**: Mark deprecated functionality clearly
 
-### README & Documentation
-
-- **Clear purpose**: State the purpose of the module/library clearly
-- **Usage examples**: Provide clear usage examples
-- **API documentation**: Document all public APIs
-
 ## Performance & Best Practices
-
-### Memory Management
-
-- **Avoid memory leaks**: Use proper cleanup in long-running processes
-- **Efficient data structures**: Choose appropriate data structures for the use case
-- **Lazy loading**: Load data only when needed
-
-### Error Handling
-
-- **Type-safe errors**: Use typed error handling with proper error types
-- **Validation first**: Validate inputs using isly before processing
-- **Graceful degradation**: Handle edge cases gracefully
 
 ## AI Assistant (Copilot) Specific Guidelines
 
