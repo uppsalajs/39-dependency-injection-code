@@ -61,4 +61,38 @@ describe("Date", () => {
 		expect(date.month).toBe(6)
 		expect(date.day).toBe(15)
 	})
+	it.each([
+		["ISO-8601", "2023-06-15"],
+		["sv-SE", "2023-06-15"],
+		["fi-FI", "2023-06-15"],
+		["nb-NO", "2023-06-15"],
+		["da-DK", "2023-06-15"],
+		["is-IS", "2023-06-15"],
+		["en-US", "06/15/2023"],
+		["en-GB", "15/06/2023"],
+		["en-IE", "15/06/2023"],
+		["fr-FR", "15/06/2023"],
+		["es-ES", "15/06/2023"],
+		["it-IT", "15/06/2023"],
+		["pt-PT", "15/06/2023"],
+		["de-DE", "15.06.2023"],
+		["de-AT", "15.06.2023"],
+		["de-CH", "15.06.2023"],
+		["ru-RU", "15.06.2023"],
+		["cs-CZ", "15.06.2023"],
+		["hu-HU", "15.06.2023"],
+		["nl-NL", "15-06-2023"],
+		["nl-BE", "15-06-2023"],
+		["fr-BE", "15.06.2023"],
+		["fr-CH", "15.06.2023"],
+		["pl-PL", "15.06.2023"],
+		["el-GR", "15/06/2023"],
+		["ja-JP", "2023年06月15日"],
+		["zh-CN", "2023年06月15日"],
+		["ko-KR", "2023년 06월 15일"],
+	] as const)("toString with locale %s", (locale, expected) =>
+		expect(new Date(2023, 6, 15).toString(locale)).toBe(expected)
+	)
+	it("toString with unsupported locale", () =>
+		expect(() => new Date(2023, 6, 15).toString("xx-XX" as any)).toThrow("Unsupported locale: xx-XX"))
 })
