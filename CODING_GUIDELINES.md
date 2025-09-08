@@ -115,6 +115,14 @@ export namespace isoly {
 - **Import from index**: Always import the top-level export: `import { isoly } from "../index"`
 - **Comprehensive coverage**: Test all public functions and edge cases
 - **Parameterized tests**: Prefer using `it.each` for multiple test cases
+- **No empty lines between tests**: Test cases should be consecutive without empty lines for compact readability
+
+### Test Formatting
+
+- **Compact test blocks**: No empty lines between individual `it()` test cases
+- **Group related tests**: Use `it.each` for similar test cases with different data
+- **Consistent indentation**: Use tabs for indentation, consistent with project style
+- **Descriptive test names**: Test names should clearly describe what is being tested
 
 ### Test Naming
 
@@ -129,12 +137,19 @@ import { isoly } from "../index"
 
 describe("Date", () => {
 	it("undefined", () => expect(isoly.Date.is(undefined)).toEqual(false))
-
 	it.each([
 		["1999-12-31", true],
 		["2000-02-29", true],
 		["1999-02-29", false],
 	])("is %s", (date, expected) => expect(isoly.Date.is(date)).toBe(expected))
+	it("single test case", () => {
+		const date = new Date(2023, 1, 5)
+		expect(date.toString()).toBe("2023-01-05")
+	})
+	it("another test case", () => {
+		const date = new Date(2023, 11, 25)
+		expect(date.toString()).toBe("2023-11-25")
+	})
 })
 ```
 
@@ -169,6 +184,7 @@ describe("Date", () => {
 - **Use it.each**: Prefer parameterized tests with `it.each`
 - **Comprehensive coverage**: Cover edge cases and error conditions
 - **Import correctly**: Always import from the package index file
+- **No empty lines between tests**: Keep test cases compact without empty lines between them
 
 ## Configuration Standards
 
