@@ -1,3 +1,5 @@
+import { Date as _Date } from "./Date"
+
 export namespace library {
-	export const a = 42
+	export import Date = _Date
 }
