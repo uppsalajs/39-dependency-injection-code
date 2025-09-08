@@ -8,6 +8,18 @@ export class Date {
 			case "en-US":
 				result = `${this.month}/${this.day}/${this.year}`
 				break
+			case "fr-FR":
+			case "es-ES":
+			case "pt-PT":
+				result = `${this.day}/${this.month}/${this.year}`
+				break
+			case "de-DE":
+			case "nl-NL":
+				result = `${this.day}.${this.month}.${this.year}`
+				break
+			case "it-IT":
+				result = `${this.day}-${this.month}-${this.year}`
+				break
 			case "sv-SE":
 			case "ISO-8601":
 			default:
@@ -19,28 +31,37 @@ export class Date {
 		return this.toString()
 	}
 	static parse(date: string, locale: isoly.Locale | "ISO-8601" = "ISO-8601"): Date | undefined {
-		let year: number | undefined, month: number | undefined, day: number | undefined
+		// order [year, month, day]
+		let result: (number | undefined)[] | undefined
 		switch (locale) {
 			case "en-US": {
-				const parts = date.split("/")
-				if (parts.length === 3) {
-					month = Number(parts[0])
-					day = Number(parts[1])
-					year = Number(parts[2])
-				}
+				const [month, day, year] = date.split("/").map(Number)
+				result = [year, month, day]
+				break
+			}
+			case "fr-FR":
+			case "es-ES":
+			case "pt-PT": {
+				result = date.split("/").map(Number).reverse()
+				break
+			}
+			case "de-DE":
+			case "nl-NL": {
+				result = date.split(".").map(Number).reverse()
+				break
+			}
+			case "it-IT": {
+				result = date.split("-").map(Number).reverse()
 				break
 			}
 			case "ISO-8601":
 			default: {
-				const parts = date.split("-")
-				if (parts.length === 3) {
-					year = Number(parts[0])
-					month = Number(parts[1])
-					day = Number(parts[2])
-				}
+				result = date.split("-").map(Number)
 				break
 			}
 		}
-		return year && month && day ? new Date(year, month, day) : undefined
+		return result && result.length == 3 && result.every((n: number | undefined): n is number => Number.isFinite(n))
+			? new Date(result[0]!, result[1]!, result[2]!)
+			: undefined
 	}
 }
